@@ -28,16 +28,20 @@ public class ConsoleApplication {
         String html = templateEngine.process("template", context);
         String xhtml = toXhtml(html);
 
-        String baseUrl = FileSystems
-                .getDefault()
-                .getPath("src", "main", "resources")
-                .toUri()
-                .toURL()
-                .toString();
+        // FlyingSaucer has a working directory. If you run this test, the working directory
+        // will be the root folder of your project. However, all files (HTML, CSS, etc.) are
+        // located under "/src/test/resources". So we want to use this folder as the working
+        // directory.
+//        String baseUrl = FileSystems
+//                .getDefault()
+//                .getPath("src", "main", "resources")
+//                .toUri()
+//                .toURL()
+//                .toString();
 
         try(OutputStream outputStream = new FileOutputStream("./target/sscc-label-test.pdf")) {
             ITextRenderer renderer = new ITextRenderer();
-            renderer.setDocumentFromString(xhtml, baseUrl);
+            renderer.setDocumentFromString(xhtml);
             renderer.layout();
             renderer.createPDF(outputStream);
         } catch (IOException e) {
