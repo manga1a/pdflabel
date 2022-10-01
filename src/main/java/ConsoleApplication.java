@@ -22,28 +22,27 @@ public class ConsoleApplication {
         TemplateEngine templateEngine = new TemplateEngine();
         templateEngine.setTemplateResolver(templateResolver);
 
-        Context context = new Context();
-        context.setVariable("name", "Mangala");
-
-        String html = templateEngine.process("template", context);
-        //String xhtml = toXhtml(html);
-
-        // FlyingSaucer has a working directory. If you run this test, the working directory
-        // will be the root folder of your project. However, all files (HTML, CSS, etc.) are
-        // located under "/src/test/resources". So we want to use this folder as the working
-        // directory.
-//        String baseUrl = FileSystems
-//                .getDefault()
-//                .getPath("src", "main", "resources")
-//                .toUri()
-//                .toURL()
-//                .toString();
-
         try(OutputStream outputStream = new FileOutputStream("./target/sscc-label-test.pdf")) {
+            Context context = new Context();
             ITextRenderer renderer = new ITextRenderer();
+
+            context.setVariable("name", "Mangala 0");
+            String html = templateEngine.process("template", context);
+
             renderer.setDocumentFromString(html);
             renderer.layout();
-            renderer.createPDF(outputStream);
+            renderer.createPDF(outputStream, false);
+
+            for(int i = 1; i < 3; ++i) {
+                context.setVariable("name", String.format("Mangala %d", i));
+                html = templateEngine.process("template", context);
+
+                renderer.setDocumentFromString(html);
+                renderer.layout();
+                renderer.writeNextDocument();
+            }
+
+            renderer.finishPDF();
         } catch (IOException e) {
             e.printStackTrace();
         }
