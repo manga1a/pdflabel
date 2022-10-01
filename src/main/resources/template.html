@@ -9,9 +9,29 @@
       }
 
       h1 {
-        font-size: 6mm;
+        font-size: 5mm;
         text-align: center;
         margin: 0;
+      }
+
+      h2 {
+        font-size: 4mm;
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+
+      table {
+        width: 100%;
+      }
+
+      .largeText {
+        font-size: 7mm;
+        margin-bottom: 1.5mm;
+      }
+
+      .mediumText {
+        font-size: 5.5mm;
+        margin-bottom: 1.5mm;
       }
 
       @page {
@@ -26,6 +46,35 @@
   </head>
   <body>
     <h1>Hi! My name is [[${name}]]!</h1>
+    <hr />
+
+    <table>
+      <tr>
+        <td colspan="2"><h2>SSCC</h2></td>
+      </tr>
+      <tr>
+        <td colspan="2"><div class="largeText">393123450000000013</div></td>
+      </tr>
+      <tr>
+        <td colspan="2"><div class="mediumText">Baked Beans 12 x 410g</div></td>
+      </tr>
+      <tr>
+        <td><h2>CONTENT</h2></td>
+        <td><h2>COUNT</h2></td>
+      </tr>
+      <tr>
+        <td><div class="largeText">09312345000005</div></td>
+        <td><div class="largeText">20</div></td>
+      </tr>
+      <tr>
+        <td><h2>BEST BEFORE (dd.mm.yy)</h2></td>
+        <td><h2>BATCH</h2></td>
+      </tr>
+      <tr>
+        <td><div class="largeText">01.12.05</div></td>
+        <td><div class="largeText">246813</div></td>
+      </tr>
+    </table>
     <hr />
   </body>
 </html>

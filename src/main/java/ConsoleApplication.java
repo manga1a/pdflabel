@@ -17,22 +17,22 @@ public class ConsoleApplication {
 
     public static void main(String[] args) {
 
-        BufferedImage barcodeImage = getBarcodeImage("00393123450000000013");
-        //BufferedImage barcodeImage = getBarcodeImage("02093123450000053720 1505120110246813");
-        File outputFile = new File("./target/barcode.png");
-        try {
-            ImageIO.write(barcodeImage, "png", outputFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-//        LabelGenerator labelGenerator = new LabelGenerator();
-//        List<String> pageValues = new ArrayList<>(Arrays.asList("Page 1", "Page 2", "Page 3"));
+//        BufferedImage barcodeImage = getBarcodeImage("00393123450000000013");
+//        //BufferedImage barcodeImage = getBarcodeImage("02093123450000053720 1505120110246813");
+//        File outputFile = new File("./target/barcode.png");
 //        try {
-//            labelGenerator.generate("./target/sscc-label-test.pdf", pageValues);
+//            ImageIO.write(barcodeImage, "png", outputFile);
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }
+
+        LabelGenerator labelGenerator = new LabelGenerator();
+        List<String> pageValues = new ArrayList<>(Arrays.asList("Page 1", "Page 2", "Page 3"));
+        try {
+            labelGenerator.generate("./target/sscc-label-test.pdf", pageValues);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private static BufferedImage getBarcodeImage(String text) {
