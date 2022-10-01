@@ -1,51 +1,32 @@
-import org.thymeleaf.TemplateEngine;
-import org.thymeleaf.context.Context;
-import org.thymeleaf.templatemode.TemplateMode;
-import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
+import org.krysalis.barcode4j.impl.code128.EAN128Bean;
+import org.krysalis.barcode4j.output.bitmap.BitmapCanvasProvider;
 import org.w3c.tidy.Tidy;
-import org.xhtmlrenderer.pdf.ITextRenderer;
 
+import java.awt.image.BufferedImage;
 import java.io.*;
-import java.net.MalformedURLException;
-import java.nio.file.FileSystems;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class ConsoleApplication {
     private static final String UTF_8 = "UTF-8";
 
-    public static void main(String[] args) throws UnsupportedEncodingException, MalformedURLException {
-        ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
-        templateResolver.setPrefix("/");
-        templateResolver.setSuffix(".html");
-        templateResolver.setTemplateMode(TemplateMode.HTML);
-        templateResolver.setCharacterEncoding(UTF_8);
+    public static void main(String[] args) {
 
-        TemplateEngine templateEngine = new TemplateEngine();
-        templateEngine.setTemplateResolver(templateResolver);
-
-        try(OutputStream outputStream = new FileOutputStream("./target/sscc-label-test.pdf")) {
-            Context context = new Context();
-            ITextRenderer renderer = new ITextRenderer();
-
-            context.setVariable("name", "Mangala 0");
-            String html = templateEngine.process("template", context);
-
-            renderer.setDocumentFromString(html);
-            renderer.layout();
-            renderer.createPDF(outputStream, false);
-
-            for(int i = 1; i < 3; ++i) {
-                context.setVariable("name", String.format("Mangala %d", i));
-                html = templateEngine.process("template", context);
-
-                renderer.setDocumentFromString(html);
-                renderer.layout();
-                renderer.writeNextDocument();
-            }
-
-            renderer.finishPDF();
+        LabelGenerator labelGenerator = new LabelGenerator();
+        List<String> pageValues = new ArrayList<>(Arrays.asList("Page 1", "Page 2", "Page 3"));
+        try {
+            labelGenerator.generate("./target/sscc-label-test.pdf", pageValues);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private static BufferedImage getBarcodeImage(String text) {
+        EAN128Bean generator = new EAN128Bean();
+        BitmapCanvasProvider canvas = new BitmapCanvasProvider(160, BufferedImage.TYPE_BYTE_BINARY, false, 0);
+        generator.generateBarcode(canvas, text);
+        return canvas.getBufferedImage();
     }
 
     private static String toXhtml(String html) throws UnsupportedEncodingException {
