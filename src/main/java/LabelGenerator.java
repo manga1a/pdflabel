@@ -27,13 +27,18 @@ public class LabelGenerator {
     }
 
     public void generate(String fileName, List<String> pageValues) throws IOException {
-        if(pageValues == null || pageValues.isEmpty()) {
+        if (pageValues == null || pageValues.isEmpty()) {
             return;
         }
 
-        try(OutputStream outputStream = new FileOutputStream(fileName)) {
+        try (OutputStream outputStream = new FileOutputStream(fileName)) {
             Context context = new Context();
             ITextRenderer renderer = new ITextRenderer();
+            renderer.getSharedContext().setReplacedElementFactory(
+                    new BarcodeReplacedElementFactory(
+                            renderer.getSharedContext().getReplacedElementFactory()
+                    )
+            );
 
             // Set resources as working directory
             String baseUrl = FileSystems
@@ -50,7 +55,7 @@ public class LabelGenerator {
             renderer.layout();
             renderer.createPDF(outputStream, false);
 
-            for(int i = 1; i < pageValues.size(); ++i) {
+            for (int i = 1; i < pageValues.size(); ++i) {
                 context.setVariable("name", pageValues.get(i));
                 html = templateEngine.process("template", context);
 
