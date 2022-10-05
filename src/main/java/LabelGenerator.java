@@ -7,6 +7,7 @@ import org.xhtmlrenderer.pdf.ITextRenderer;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.file.FileSystems;
 import java.util.List;
 
 public class LabelGenerator {
@@ -34,10 +35,18 @@ public class LabelGenerator {
             Context context = new Context();
             ITextRenderer renderer = new ITextRenderer();
 
+            // Set resources as working directory
+            String baseUrl = FileSystems
+                    .getDefault()
+                    .getPath("src", "main", "resources")
+                    .toUri()
+                    .toURL()
+                    .toString();
+
             context.setVariable("name", pageValues.get(0));
             String html = templateEngine.process("template", context);
 
-            renderer.setDocumentFromString(html);
+            renderer.setDocumentFromString(html, baseUrl);
             renderer.layout();
             renderer.createPDF(outputStream, false);
 
@@ -45,7 +54,7 @@ public class LabelGenerator {
                 context.setVariable("name", pageValues.get(i));
                 html = templateEngine.process("template", context);
 
-                renderer.setDocumentFromString(html);
+                renderer.setDocumentFromString(html, baseUrl);
                 renderer.layout();
                 renderer.writeNextDocument();
             }
