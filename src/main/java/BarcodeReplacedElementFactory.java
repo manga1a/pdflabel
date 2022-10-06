@@ -71,7 +71,7 @@ public class BarcodeReplacedElementFactory implements ReplacedElementFactory {
     }
 
     private BufferedImage generateBarcodeImage(String text) {
-        BitmapCanvasProvider canvas = new BitmapCanvasProvider(160, BufferedImage.TYPE_BYTE_BINARY, false, 0);
+        BitmapCanvasProvider canvas = new BitmapCanvasProvider(300, BufferedImage.TYPE_BYTE_BINARY, false, 0);
         generator.generateBarcode(canvas, text);
         return canvas.getBufferedImage();
     }
