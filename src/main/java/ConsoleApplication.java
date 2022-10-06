@@ -17,15 +17,6 @@ public class ConsoleApplication {
 
     public static void main(String[] args) {
 
-//        BufferedImage barcodeImage = getBarcodeImage("00393123450000000013");
-//        //BufferedImage barcodeImage = getBarcodeImage("02093123450000053720 1505120110246813");
-//        File outputFile = new File("./target/barcode.png");
-//        try {
-//            ImageIO.write(barcodeImage, "png", outputFile);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-
         LabelGenerator labelGenerator = new LabelGenerator();
         List<String> pageValues = new ArrayList<>(Arrays.asList("Page 1", "Page 2", "Page 3"));
         try {
@@ -42,16 +33,5 @@ public class ConsoleApplication {
         BitmapCanvasProvider canvas = new BitmapCanvasProvider(160, BufferedImage.TYPE_BYTE_BINARY, false, 0);
         generator.generateBarcode(canvas, text);
         return canvas.getBufferedImage();
-    }
-
-    private static String toXhtml(String html) throws UnsupportedEncodingException {
-        Tidy tidy = new Tidy();
-        tidy.setInputEncoding(UTF_8);
-        tidy.setOutputEncoding(UTF_8);
-        tidy.setXHTML(true);
-        ByteArrayInputStream inputStream = new ByteArrayInputStream(html.getBytes(UTF_8));
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        tidy.parseDOM(inputStream, outputStream);
-        return outputStream.toString(UTF_8);
     }
 }

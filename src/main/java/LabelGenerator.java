@@ -4,10 +4,7 @@ import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import org.xhtmlrenderer.pdf.ITextRenderer;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.nio.file.FileSystems;
+import java.io.*;
 import java.util.List;
 
 public class LabelGenerator {
@@ -40,20 +37,19 @@ public class LabelGenerator {
                     )
             );
 
-            context.setVariable("name", pageValues.get(0));
-            String html = templateEngine.process("template", context);
+            final String template = "template";
 
-            renderer.setDocumentFromString(html);
-            renderer.layout();
-            renderer.createPDF(outputStream, false);
-
-            for (int i = 1; i < pageValues.size(); ++i) {
+            for (int i = 0; i < pageValues.size(); ++i) {
                 context.setVariable("name", pageValues.get(i));
-                html = templateEngine.process("template", context);
+                String html = templateEngine.process(template, context);
 
                 renderer.setDocumentFromString(html);
                 renderer.layout();
-                renderer.writeNextDocument();
+                if (i == 0) {
+                    renderer.createPDF(outputStream, false);
+                } else {
+                    renderer.writeNextDocument();
+                }
             }
 
             renderer.finishPDF();
