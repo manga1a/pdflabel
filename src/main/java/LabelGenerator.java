@@ -40,18 +40,10 @@ public class LabelGenerator {
                     )
             );
 
-            // Set resources as working directory
-            String baseUrl = FileSystems
-                    .getDefault()
-                    .getPath("src", "main", "resources")
-                    .toUri()
-                    .toURL()
-                    .toString();
-
             context.setVariable("name", pageValues.get(0));
             String html = templateEngine.process("template", context);
 
-            renderer.setDocumentFromString(html, baseUrl);
+            renderer.setDocumentFromString(html);
             renderer.layout();
             renderer.createPDF(outputStream, false);
 
@@ -59,7 +51,7 @@ public class LabelGenerator {
                 context.setVariable("name", pageValues.get(i));
                 html = templateEngine.process("template", context);
 
-                renderer.setDocumentFromString(html, baseUrl);
+                renderer.setDocumentFromString(html);
                 renderer.layout();
                 renderer.writeNextDocument();
             }
