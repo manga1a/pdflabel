@@ -39,6 +39,22 @@ public class ConsoleApplication {
         palletData.setBatchNumber("123456");
         variables.add(getVariables(title, palletData));
 
+        palletData = new PalletData();
+        palletData.setSscc("393123450000000013");
+        palletData.setDescription("Coconut Milk 12 x 410g");
+        palletData.setGtin("09312345000005");
+        palletData.setCount("1999");
+        palletData.setUseByDate(Date.from(Instant.now()));
+        variables.add(getVariables(title, palletData));
+
+        palletData = new PalletData();
+        palletData.setSscc("393123450000000013");
+        palletData.setDescription("Coconut Powder 12 x 410g");
+        palletData.setGtin("09312345000005");
+        palletData.setCount("9999");
+        palletData.setBestBeforeDate(Date.from(Instant.now()));
+        variables.add(getVariables(title, palletData));
+
         return variables;
     }
 
