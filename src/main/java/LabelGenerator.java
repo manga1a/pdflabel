@@ -57,7 +57,7 @@ public class LabelGenerator {
 
             renderer.finishPDF();
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             throw e;
         }

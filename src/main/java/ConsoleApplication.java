@@ -22,21 +22,21 @@ public class ConsoleApplication {
         final String title = "A.Clouet Australia";
 
         PalletData palletData = new PalletData();
+        palletData.setSscc("112345678000000414");
+        palletData.setDescription("Raw Beans 12 x 410g");
+        palletData.setGtin("09312345000005");
+        palletData.setCount("888");
+        palletData.setUseByDate(Date.from(Instant.now()));
+        palletData.setBatchNumber("1111111");
+        variables.add(getVariables(title, palletData));
+
+        palletData = new PalletData();
         palletData.setSscc("393123450000000013");
         palletData.setDescription("Baked Beans 12 x 410g");
         palletData.setGtin("09312345000005");
         palletData.setCount("999");
         palletData.setBestBeforeDate(Date.from(Instant.now()));
         palletData.setBatchNumber("123456");
-        variables.add(getVariables(title, palletData));
-
-        palletData = new PalletData();
-        palletData.setSscc("393123450000000023");
-        palletData.setDescription("Raw Beans 12 x 410g");
-        palletData.setGtin("09312345000011");
-        palletData.setCount("888");
-        palletData.setUseByDate(Date.from(Instant.now()));
-        palletData.setBatchNumber("1111111");
         variables.add(getVariables(title, palletData));
 
         return variables;
