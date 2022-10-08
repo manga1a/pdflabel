@@ -1,6 +1,8 @@
 import com.lowagie.text.Image;
 import org.krysalis.barcode4j.impl.code128.EAN128Bean;
 import org.krysalis.barcode4j.output.bitmap.BitmapCanvasProvider;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Element;
 import org.xhtmlrenderer.extend.FSImage;
 import org.xhtmlrenderer.extend.ReplacedElement;
@@ -16,6 +18,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class BarcodeReplacedElementFactory implements ReplacedElementFactory {
+    private static Logger logger = LoggerFactory.getLogger(BarcodeReplacedElementFactory.class);
     private final ReplacedElementFactory superFactory;
     private final EAN128Bean generator;
 
@@ -51,6 +54,7 @@ public class BarcodeReplacedElementFactory implements ReplacedElementFactory {
 
             return new ITextImageElement(fsImage);
         } catch (Exception e) {
+            logger.error("Barcode generation exception.", e);
             throw new RuntimeException("There was a problem generating barcode image.", e);
         }
     }
