@@ -1,3 +1,5 @@
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.templatemode.TemplateMode;
@@ -9,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 public class LabelGenerator {
+    private static Logger logger = LoggerFactory.getLogger(LabelGenerator.class);
     private static final String UTF_8 = "UTF-8";
     private final ClassLoaderTemplateResolver templateResolver;
     private final TemplateEngine templateEngine;
@@ -58,7 +61,7 @@ public class LabelGenerator {
             renderer.finishPDF();
 
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Error generating label.", e);
             throw e;
         }
     }
