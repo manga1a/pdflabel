@@ -1,6 +1,7 @@
 import java.io.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.*;
 
 public class ConsoleApplication {
@@ -8,28 +9,42 @@ public class ConsoleApplication {
     public static void main(String[] args) {
 
         LabelGenerator labelGenerator = new LabelGenerator();
-        List<String> pageValues = new ArrayList<>(Arrays.asList("Page 1", "Page 2", "Page 3"));
+        List<Map<String, Object>> pageVariables = getDummyData();
         try {
-            labelGenerator.generate("./target/sscc-label-test.pdf", pageValues);
+            labelGenerator.generate("./target/sscc-label-test.pdf", pageVariables);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    List<Map<String, String>> getDummyData() {
+    private static List<Map<String, Object>> getDummyData() {
+        List<Map<String, Object>> variables = new ArrayList<>();
         final String title = "A.Clouet Australia";
 
         PalletData palletData = new PalletData();
         palletData.setSscc("393123450000000013");
         palletData.setDescription("Baked Beans 12 x 410g");
         palletData.setGtin("09312345000005");
+        palletData.setCount("999");
+        palletData.setBestBeforeDate(Date.from(Instant.now()));
+        palletData.setBatchNumber("123456");
+        variables.add(getVariables(title, palletData));
 
-        return null;
+        palletData = new PalletData();
+        palletData.setSscc("393123450000000023");
+        palletData.setDescription("Raw Beans 12 x 410g");
+        palletData.setGtin("09312345000011");
+        palletData.setCount("888");
+        palletData.setUseByDate(Date.from(Instant.now()));
+        palletData.setBatchNumber("1111111");
+        variables.add(getVariables(title, palletData));
+
+        return variables;
     }
 
-    static Map<String, String> getVariables(String title, PalletData palletData) {
+    static Map<String, Object> getVariables(String title, PalletData palletData) {
 
-        Map<String, String> variables = new HashMap<>();
+        Map<String, Object> variables = new HashMap<>();
 
         variables.put("title", title);
         variables.put("sscc", palletData.getSscc());
@@ -39,11 +54,12 @@ public class ConsoleApplication {
         variables.put("batch", palletData.getBatchNumber() == null ? "" : palletData.getBatchNumber());
         addDateVariables(palletData, variables);
         variables.put("barcodeConcat", getConcatBarcode(palletData));
+        variables.put("barcodeSscc", getSsccBarcode(palletData.getSscc()));
 
         return variables;
     }
 
-    public static void addDateVariables(PalletData palletData, Map<String, String> variables) {
+    public static void addDateVariables(PalletData palletData, Map<String, Object> variables) {
         DateFormat dateFormat = new SimpleDateFormat("dd.MM.yy");
         String dateLabel = null;
         Date dateValue = null;

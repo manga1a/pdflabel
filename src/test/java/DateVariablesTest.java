@@ -15,7 +15,7 @@ public class DateVariablesTest {
     public void testBestBeforeDate() throws ParseException {
         PalletData palletData = new PalletData();
         palletData.setBestBeforeDate(dateFormat.parse("2005-12-01"));
-        Map<String, String> variables = new HashMap<>();
+        Map<String, Object> variables = new HashMap<>();
 
         ConsoleApplication.addDateVariables(palletData, variables);
 
@@ -27,7 +27,7 @@ public class DateVariablesTest {
     public void testUseByDate() throws ParseException {
         PalletData palletData = new PalletData();
         palletData.setUseByDate(dateFormat.parse("2022-10-08"));
-        Map<String, String> variables = new HashMap<>();
+        Map<String, Object> variables = new HashMap<>();
 
         ConsoleApplication.addDateVariables(palletData, variables);
 
