@@ -1,6 +1,7 @@
 import com.lowagie.text.Image;
 import org.krysalis.barcode4j.impl.code128.EAN128Bean;
 import org.krysalis.barcode4j.output.bitmap.BitmapCanvasProvider;
+import org.krysalis.barcode4j.tools.UnitConv;
 import org.w3c.dom.Element;
 import org.xhtmlrenderer.extend.FSImage;
 import org.xhtmlrenderer.extend.ReplacedElement;
@@ -18,13 +19,17 @@ import java.awt.image.BufferedImage;
 public class BarcodeReplacedElementFactory implements ReplacedElementFactory {
     private final ReplacedElementFactory superFactory;
     private final EAN128Bean generator;
+    private static final int DPI = 203;
 
     public BarcodeReplacedElementFactory(ReplacedElementFactory superFactory) {
         this.superFactory = superFactory;
 
         generator = new EAN128Bean();
-        generator.setGroupSeparator(' ');
-        generator.setFontSize(2d);
+        generator.setModuleWidth(UnitConv.in2mm(30f / DPI));
+        generator.setBarHeight(280d);
+        generator.doQuietZone(true);
+        //generator.setGroupSeparator(' ');
+        generator.setFontSize(33d);
     }
 
     @Override
@@ -45,9 +50,9 @@ public class BarcodeReplacedElementFactory implements ReplacedElementFactory {
             Image image = Image.getInstance(bufferedImage, Color.BLACK);
             final FSImage fsImage = new ITextFSImage(image);
 
-            if ((cssWidth != -1) || (cssHeight != -1)) {
-                fsImage.scale(cssWidth, cssHeight);
-            }
+//            if ((cssWidth != -1) || (cssHeight != -1)) {
+//                fsImage.scale(cssWidth, cssHeight);
+//            }
 
             return new ITextImageElement(fsImage);
         } catch (Exception e) {
@@ -71,7 +76,7 @@ public class BarcodeReplacedElementFactory implements ReplacedElementFactory {
     }
 
     private BufferedImage generateBarcodeImage(String text) {
-        BitmapCanvasProvider canvas = new BitmapCanvasProvider(300, BufferedImage.TYPE_BYTE_BINARY, false, 0);
+        BitmapCanvasProvider canvas = new BitmapCanvasProvider(DPI, BufferedImage.TYPE_BYTE_BINARY, false, 0);
         generator.generateBarcode(canvas, text);
         return canvas.getBufferedImage();
     }
