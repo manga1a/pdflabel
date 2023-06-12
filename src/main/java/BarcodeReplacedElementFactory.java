@@ -19,17 +19,16 @@ import java.awt.image.BufferedImage;
 public class BarcodeReplacedElementFactory implements ReplacedElementFactory {
     private final ReplacedElementFactory superFactory;
     private final EAN128Bean generator;
-    private static final int DPI = 203;
+    private static final int DPI = 300;
 
     public BarcodeReplacedElementFactory(ReplacedElementFactory superFactory) {
         this.superFactory = superFactory;
 
         generator = new EAN128Bean();
-        generator.setModuleWidth(UnitConv.in2mm(30f / DPI));
-        generator.setBarHeight(280d);
+        generator.setModuleWidth(UnitConv.in2mm(30d / (double) DPI));
+        generator.setBarHeight(UnitConv.in2mm(2250d / (double) DPI));
         generator.doQuietZone(true);
-        //generator.setGroupSeparator(' ');
-        generator.setFontSize(33d);
+        generator.setFontSize(UnitConv.in2mm(300d / (double) DPI));
     }
 
     @Override
@@ -49,10 +48,6 @@ public class BarcodeReplacedElementFactory implements ReplacedElementFactory {
             BufferedImage bufferedImage = generateBarcodeImage(src);
             Image image = Image.getInstance(bufferedImage, Color.BLACK);
             final FSImage fsImage = new ITextFSImage(image);
-
-//            if ((cssWidth != -1) || (cssHeight != -1)) {
-//                fsImage.scale(cssWidth, cssHeight);
-//            }
 
             return new ITextImageElement(fsImage);
         } catch (Exception e) {
