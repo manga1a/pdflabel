@@ -22,38 +22,38 @@ public class ConsoleApplication {
         final String title = "A.Clouet Australia";
 
         PalletData palletData = new PalletData();
-        palletData.setSscc("112345678000000414");
-        palletData.setDescription("Raw Beans 12 x 410g");
-        palletData.setGtin("09312345000005");
-        palletData.setCount("888");
-        palletData.setUseByDate(Date.from(Instant.now()));
-        palletData.setBatchNumber("1111111");
-        variables.add(getVariables(title, palletData));
-
-        palletData = new PalletData();
-        palletData.setSscc("393123450000000013");
-        palletData.setDescription("Baked Beans 12 x 410g");
-        palletData.setGtin("09312345000005");
-        palletData.setCount("999");
+        palletData.setSscc("395560410000000018");
+        palletData.setDescription("Coconut Cream 400ML");
+        palletData.setGtin("29556041603946");
+        palletData.setCount("160");
         palletData.setBestBeforeDate(Date.from(Instant.now()));
-        palletData.setBatchNumber("123456");
+        //palletData.setBatchNumber("111");
         variables.add(getVariables(title, palletData));
 
-        palletData = new PalletData();
-        palletData.setSscc("393123450000000013");
-        palletData.setDescription("Coconut Milk 12 x 410g");
-        palletData.setGtin("09312345000005");
-        palletData.setCount("1999");
-        palletData.setUseByDate(Date.from(Instant.now()));
-        variables.add(getVariables(title, palletData));
-
-        palletData = new PalletData();
-        palletData.setSscc("393123450000000013");
-        palletData.setDescription("Coconut Powder 12 x 410g");
-        palletData.setGtin("09312345000005");
-        palletData.setCount("9999");
-        palletData.setBestBeforeDate(Date.from(Instant.now()));
-        variables.add(getVariables(title, palletData));
+//        palletData = new PalletData();
+//        palletData.setSscc("393123450000000013");
+//        palletData.setDescription("Baked Beans 12 x 410g");
+//        palletData.setGtin("09312345000005");
+//        palletData.setCount("999");
+//        palletData.setBestBeforeDate(Date.from(Instant.now()));
+//        palletData.setBatchNumber("123456");
+//        variables.add(getVariables(title, palletData));
+//
+//        palletData = new PalletData();
+//        palletData.setSscc("393123450000000013");
+//        palletData.setDescription("Coconut Milk 12 x 410g");
+//        palletData.setGtin("09312345000005");
+//        palletData.setCount("1999");
+//        palletData.setUseByDate(Date.from(Instant.now()));
+//        variables.add(getVariables(title, palletData));
+//
+//        palletData = new PalletData();
+//        palletData.setSscc("393123450000000013");
+//        palletData.setDescription("Coconut Powder 12 x 410g");
+//        palletData.setGtin("09312345000005");
+//        palletData.setCount("9999");
+//        palletData.setBestBeforeDate(Date.from(Instant.now()));
+//        variables.add(getVariables(title, palletData));
 
         return variables;
     }
@@ -97,14 +97,15 @@ public class ConsoleApplication {
         DateFormat dateFormat = new SimpleDateFormat("yyMMdd");
 
         StringBuilder builder = new StringBuilder();
-        builder.append("02").append(palletData.getGtin())
-                .append("37").append(palletData.getCount())
-                .append(" ");
+        builder.append("02").append(palletData.getGtin());
+
         if (palletData.getBestBeforeDate() != null) {
             builder.append("15").append(dateFormat.format(palletData.getBestBeforeDate()));
         } else if(palletData.getUseByDate() != null) {
             builder.append("17").append(dateFormat.format(palletData.getUseByDate()));
         }
+
+        builder.append("37").append(palletData.getCount());
 
         if (palletData.getBatchNumber() != null) {
             builder.append("10").append(palletData.getBatchNumber());
