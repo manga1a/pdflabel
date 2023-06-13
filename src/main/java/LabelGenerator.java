@@ -34,7 +34,7 @@ public class LabelGenerator {
              InputStream templateStream = classLoader.getResourceAsStream("sscc_template.xsl");
              InputStream dataStream = classLoader.getResourceAsStream("asn_sample.xml")) {
 
-            FopFactory fopFactory = FopFactory.newInstance();
+            FopFactory fopFactory = FopFactory.newInstance(new File(".").toURI());
             FOUserAgent userAgent = fopFactory.newFOUserAgent();
 
             // set output format
