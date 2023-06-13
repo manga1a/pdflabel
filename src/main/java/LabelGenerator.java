@@ -1,11 +1,16 @@
+import org.apache.fop.apps.FOUserAgent;
+import org.apache.fop.apps.Fop;
+import org.apache.fop.apps.FopFactory;
+import org.apache.fop.apps.MimeConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.thymeleaf.TemplateEngine;
-import org.thymeleaf.context.Context;
-import org.thymeleaf.templatemode.TemplateMode;
-import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
-import org.xhtmlrenderer.pdf.ITextRenderer;
 
+import javax.xml.transform.Result;
+import javax.xml.transform.Source;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.sax.SAXResult;
+import javax.xml.transform.stream.StreamSource;
 import java.io.*;
 import java.util.List;
 import java.util.Map;
@@ -13,56 +18,44 @@ import java.util.Map;
 public class LabelGenerator {
     private static Logger logger = LoggerFactory.getLogger(LabelGenerator.class);
     private static final String UTF_8 = "UTF-8";
-    private final ClassLoaderTemplateResolver templateResolver;
-    private final TemplateEngine templateEngine;
 
     public LabelGenerator() {
-        this.templateResolver = new ClassLoaderTemplateResolver();
-        templateResolver.setPrefix("/");
-        templateResolver.setSuffix(".html");
-        templateResolver.setTemplateMode(TemplateMode.HTML);
-        templateResolver.setCharacterEncoding(UTF_8);
 
-        templateEngine = new TemplateEngine();
-        templateEngine.setTemplateResolver(templateResolver);
     }
 
-    public void generate(String fileName, List<Map<String, Object>> pageVariables) throws IOException {
+    public void generate(String fileName, List<Map<String, Object>> pageVariables) {
         if (pageVariables == null || pageVariables.isEmpty()) {
             return;
         }
 
-        try (OutputStream outputStream = new FileOutputStream(fileName)) {
+        ClassLoader classLoader = getClass().getClassLoader();
 
-            ITextRenderer renderer = new ITextRenderer();
-            renderer.getSharedContext().setReplacedElementFactory(
-                    new BarcodeReplacedElementFactory(
-                            renderer.getSharedContext().getReplacedElementFactory()
-                    )
-            );
+        try (OutputStream outputStream = new FileOutputStream(fileName);
+             InputStream templateStream = classLoader.getResourceAsStream("sscc_template.xsl");
+             InputStream dataStream = classLoader.getResourceAsStream("asn_sample.xml")) {
 
-            final String template = "sscc_template";
-            Context context = new Context();
+            FopFactory fopFactory = FopFactory.newInstance();
+            FOUserAgent userAgent = fopFactory.newFOUserAgent();
 
-            for (int i = 0; i < pageVariables.size(); ++i) {
-                context.clearVariables();
-                context.setVariables(pageVariables.get(i));
-                String html = templateEngine.process(template, context);
+            // set output format
+            Fop fop = fopFactory.newFop(MimeConstants.MIME_PDF, userAgent, outputStream);
 
-                renderer.setDocumentFromString(html);
-                renderer.layout();
-                if (i == 0) {
-                    renderer.createPDF(outputStream, false);
-                } else {
-                    renderer.writeNextDocument();
-                }
-            }
+            // Load template
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer(new StreamSource(templateStream));
 
-            renderer.finishPDF();
+            // Set value of parameters in stylesheet
+            transformer.setParameter("version", "1.0");
+
+            // Input for XSLT transformations
+            Source xmlSource = new StreamSource(dataStream);
+
+            Result result = new SAXResult(fop.getDefaultHandler());
+
+            transformer.transform(xmlSource, result);
 
         } catch (Exception e) {
             logger.error("Error generating label.", e);
-            throw e;
         }
     }
 }

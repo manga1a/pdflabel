@@ -14,42 +14,21 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>org.thymeleaf</groupId>
-            <artifactId>thymeleaf</artifactId>
-            <version>3.0.15.RELEASE</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.xhtmlrenderer</groupId>
-            <artifactId>flying-saucer-core</artifactId>
-            <version>9.1.22</version>
-        </dependency>
-        <dependency>
-            <groupId>org.xhtmlrenderer</groupId>
-            <artifactId>flying-saucer-pdf-openpdf</artifactId>
-            <version>9.1.22</version>
-        </dependency>
-        <dependency>
-            <groupId>net.sf.jtidy</groupId>
-            <artifactId>jtidy</artifactId>
-            <version>r938</version>
-            <scope>compile</scope>
-        </dependency>
+        <!-- https://mvnrepository.com/artifact/net.sf.barcode4j/barcode4j-fop-ext-complete -->
         <dependency>
             <groupId>net.sf.barcode4j</groupId>
-            <artifactId>barcode4j</artifactId>
-            <version>2.1</version>
+            <artifactId>barcode4j-fop-ext-complete</artifactId>
+            <version>2.0</version>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.2.11</version>
+            <version>1.4.7</version>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
-            <version>5.8.2</version>
+            <version>5.9.2</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

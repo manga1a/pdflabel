@@ -1,0 +1,77 @@
+<MXCASN>
+    <HEADER>
+        <FROMBUSS>The Toggen Partnership</FROMBUSS>
+    </HEADER>
+    <DETAIL>
+        <SHIPMENT>
+            <STORE>
+                <STORECODE>TGN123</STORECODE>
+                <TARE>
+                    <PACK>
+                        <SSCC>00999999999000000245</SSCC>
+                        <LINGRP>
+                            <LIN>
+                                <EAN>19999999999762</EAN>
+                            </LIN>
+                            <IMD disable-output-escaping="yes">TOGGEN DUNE HARVESTER OIL</IMD>
+                            <QTY>
+                                <TOTALSHIPQUANTITY>48</TOTALSHIPQUANTITY>
+                            </QTY>
+                            <ASNSTATUS />
+                            <DTM>
+                                <BESTBEFOREDATE>20220802</BESTBEFOREDATE>
+                            </DTM>
+                            <RFF>
+                                <BATCHNO>212301</BATCHNO>
+                            </RFF>
+                        </LINGRP>
+                    </PACK>
+                </TARE>
+                <TARE>
+                    <PACK>
+                        <SSCC>00999999999000000252</SSCC>
+                        <LINGRP>
+                            <LIN>
+                                <EAN>19999999993678</EAN>
+                            </LIN>
+                            <IMD disable-output-escaping="yes">TOGGEN GOLD STANDARD 750ML XXX</IMD>
+                            <QTY>
+                                <TOTALSHIPQUANTITY>128</TOTALSHIPQUANTITY>
+                            </QTY>
+                            <ASNSTATUS />
+                            <DTM>
+                                <BESTBEFOREDATE>20220802</BESTBEFOREDATE>
+                            </DTM>
+                            <RFF>
+                                <BATCHNO>212301</BATCHNO>
+                            </RFF>
+                        </LINGRP>
+                    </PACK>
+                </TARE>
+                <TARE>
+                    <PACK>
+                        <SSCC>00999999999000000269</SSCC>
+                        <LINGRP>
+                            <LIN>
+                                <EAN>19999999992763</EAN>
+                            </LIN>
+                            <IMD disable-output-escaping="yes">TOGGEN GOLDEN PEEL OIL 750ML</IMD>
+                            <QTY>
+                                <TOTALSHIPQUANTITY>145</TOTALSHIPQUANTITY>
+                            </QTY>
+                            <ASNSTATUS />
+                            <DTM>
+                                <BESTBEFOREDATE>20220802</BESTBEFOREDATE>
+                            </DTM>
+                            <RFF>
+                                <BATCHNO>212301</BATCHNO>
+                            </RFF>
+                        </LINGRP>
+                    </PACK>
+                </TARE>
+            </STORE>
+        </SHIPMENT>
+    </DETAIL>
+    <SUMMARY>
+    </SUMMARY>
+</MXCASN>

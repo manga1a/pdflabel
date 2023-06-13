@@ -10,11 +10,7 @@ public class ConsoleApplication {
 
         LabelGenerator labelGenerator = new LabelGenerator();
         List<Map<String, Object>> pageVariables = getDummyData();
-        try {
-            labelGenerator.generate("./target/sscc-label-test.pdf", pageVariables);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        labelGenerator.generate("./target/sscc-label-test.pdf", pageVariables);
     }
 
     private static List<Map<String, Object>> getDummyData() {
