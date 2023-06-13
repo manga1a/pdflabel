@@ -27,7 +27,7 @@ public class ConsoleApplication {
         palletData.setGtin("29556041603946");
         palletData.setCount("160");
         palletData.setBestBeforeDate(Date.from(Instant.now()));
-        //palletData.setBatchNumber("111");
+        palletData.setBatchNumber("451214");
         variables.add(getVariables(title, palletData));
 
 //        palletData = new PalletData();
@@ -97,7 +97,7 @@ public class ConsoleApplication {
         DateFormat dateFormat = new SimpleDateFormat("yyMMdd");
 
         StringBuilder builder = new StringBuilder();
-        builder.append("02").append(palletData.getGtin());
+        builder.append("02").append(palletData.getGtin()).append(' ');
 
         if (palletData.getBestBeforeDate() != null) {
             builder.append("15").append(dateFormat.format(palletData.getBestBeforeDate()));
@@ -105,10 +105,10 @@ public class ConsoleApplication {
             builder.append("17").append(dateFormat.format(palletData.getUseByDate()));
         }
 
-        builder.append("37").append(palletData.getCount());
+        builder.append(' ').append("37").append(palletData.getCount());
 
         if (palletData.getBatchNumber() != null) {
-            builder.append("10").append(palletData.getBatchNumber());
+            builder.append(' ').append("10").append(palletData.getBatchNumber());
         }
 
         return builder.toString();

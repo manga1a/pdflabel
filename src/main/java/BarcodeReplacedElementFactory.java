@@ -25,10 +25,11 @@ public class BarcodeReplacedElementFactory implements ReplacedElementFactory {
         this.superFactory = superFactory;
 
         generator = new EAN128Bean();
-        generator.setModuleWidth(UnitConv.in2mm(30d / (double) DPI));
+        generator.setModuleWidth(UnitConv.in2mm(25d / (double) DPI));
         generator.setBarHeight(UnitConv.in2mm(2250d / (double) DPI));
         generator.doQuietZone(true);
-        generator.setFontSize(UnitConv.in2mm(300d / (double) DPI));
+        generator.setFontSize(UnitConv.in2mm(250d / (double) DPI));
+        generator.setGroupSeparator(' ');
     }
 
     @Override
