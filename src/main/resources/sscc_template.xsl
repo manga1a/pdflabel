@@ -5,9 +5,10 @@
     <!-- ========================= -->
     <!-- root element: projectteam -->
     <!-- ========================= -->
-    <xsl:template match="MXCASN">
-        <xsl:variable name="STORECODE" select="DETAIL/SHIPMENT/STORE/STORECODE" />
-        <xsl:variable name="COMPANY" select="HEADER/FROMBUSS" />
+    <!-- ========================= -->
+    <xsl:template match="PalletLabels">
+<!--        <xsl:variable name="STORECODE" select="detail/SHIPMENT/STORE/STORECODE" />-->
+        <xsl:variable name="COMPANY" select="header" />
         <fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
             <fo:layout-master-set>
                 <fo:simple-page-master master-name="first" page-width="105mm" page-height="148mm" margin-top="0mm" margin-bottom="0mm" margin-left="0mm" margin-right="0mm">
@@ -17,15 +18,15 @@
             </fo:layout-master-set>
             <fo:page-sequence master-reference="first">
                 <fo:flow flow-name="xsl-region-body" font-size="12pt">
-                    <xsl:for-each select="DETAIL/SHIPMENT/STORE/TARE">
+                    <xsl:for-each select="detail/pallet">
                         <xsl:variable name="FONT_SIZE" select="'26pt'" />
                         <xsl:variable name="FONT_SIZE_LABELS" select="'11pt'" />
-                        <xsl:variable name="SSCC" select="PACK/SSCC" />
-                        <xsl:variable name="EAN" select="PACK/LINGRP/LIN/EAN" />
-                        <xsl:variable name="BATCH" select="PACK/LINGRP/RFF/BATCHNO" />
+                        <xsl:variable name="SSCC" select="sscc" />
+                        <xsl:variable name="GTIN" select="lineItem/gtin" />
+                        <xsl:variable name="BATCH" select="lineItem/RFF/BATCHNO" />
                         <!-- 20220802 -->
-                        <xsl:variable name="FULL_DATE" select="PACK/LINGRP/DTM/BESTBEFOREDATE" />
-                        <xsl:variable name="QTY" select="PACK/LINGRP/QTY/TOTALSHIPQUANTITY" />
+                        <xsl:variable name="FULL_DATE" select="lineItem/DTM/BESTBEFOREDATE" />
+                        <xsl:variable name="QTY" select="lineItem/quantity" />
                         <xsl:variable name="YEAR" select="substring($FULL_DATE, 3,2 )" />
                         <xsl:variable name="MONTH" select="substring($FULL_DATE, 5,2)" />
                         <xsl:variable name="DAY" select="substring($FULL_DATE, 7,2 )" />
@@ -46,7 +47,7 @@
                                 <xsl:value-of select="substring($SSCC, 3)" />
                             </fo:block>
                             <fo:block text-align="left" margin-left="3mm" font-family="Helvetica" font-size="14pt" space-after="8pt">
-                                <xsl:value-of select="PACK/LINGRP/IMD" />
+                                <xsl:value-of select="lineItem/description" />
                             </fo:block>
                             <fo:table width="10cm" table-layout="fixed" margin-left="1.5mm">
                                 <fo:table-column column-width="6.7cm" />
@@ -76,7 +77,7 @@
                                                 <xsl:attribute name="font-size">
                                                     <xsl:value-of select="$FONT_SIZE" />
                                                 </xsl:attribute>
-                                                <xsl:value-of select="$EAN" />
+                                                <xsl:value-of select="$GTIN" />
                                             </fo:block>
                                         </fo:table-cell>
                                         <fo:table-cell>
@@ -110,14 +111,14 @@
                                                 BATCH
                                             </fo:block>
                                         </fo:table-cell>
-                                        <fo:table-cell>
-                                            <fo:block text-align="end">
-                                                <xsl:attribute name="font-size">
-                                                    <xsl:value-of select="$FONT_SIZE_LABELS" />
-                                                </xsl:attribute>
-                                                DC
-                                            </fo:block>
-                                        </fo:table-cell>
+<!--                                        <fo:table-cell>-->
+<!--                                            <fo:block text-align="end">-->
+<!--                                                <xsl:attribute name="font-size">-->
+<!--                                                    <xsl:value-of select="$FONT_SIZE_LABELS" />-->
+<!--                                                </xsl:attribute>-->
+<!--                                                DC-->
+<!--                                            </fo:block>-->
+<!--                                        </fo:table-cell>-->
                                     </fo:table-row>
                                     <fo:table-row>
                                         <fo:table-cell>
@@ -136,14 +137,14 @@
                                                 <xsl:value-of select="$BATCH" />
                                             </fo:block>
                                         </fo:table-cell>
-                                        <fo:table-cell vertical-align="top">
-                                            <fo:block text-align="end" font-size="16pt">
-                                                <xsl:attribute name="font-size">
-                                                    <xsl:value-of select="$FONT_SIZE_LABELS" />
-                                                </xsl:attribute>
-                                                <xsl:value-of select="$STORECODE" />
-                                            </fo:block>
-                                        </fo:table-cell>
+<!--                                        <fo:table-cell vertical-align="top">-->
+<!--                                            <fo:block text-align="end" font-size="16pt">-->
+<!--                                                <xsl:attribute name="font-size">-->
+<!--                                                    <xsl:value-of select="$FONT_SIZE_LABELS" />-->
+<!--                                                </xsl:attribute>-->
+<!--                                                <xsl:value-of select="$STORECODE" />-->
+<!--                                            </fo:block>-->
+<!--                                        </fo:table-cell>-->
                                     </fo:table-row>
                                 </fo:table-body>
                             </fo:table>
@@ -153,7 +154,7 @@
                             <fo:block text-align="center">
                                 <fo:instream-foreign-object>
                                     <xsl:variable name="PAD_QTY" select="format-number($QTY, '00')" />
-                                    <xsl:variable name="BARCODE" select="concat('02' , substring($EAN,1,13) ,'&#x00f0;37' , $PAD_QTY, '&#x00f1;15' , $YEAR , $MONTH , $DAY, '10', $BATCH )" />
+                                    <xsl:variable name="BARCODE" select="concat('02' , substring($GTIN,1,13) ,'&#x00f0;37' , $PAD_QTY, '&#x00f1;15' , $YEAR , $MONTH , $DAY, '10', $BATCH )" />
                                     <barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns" orientation="0">
                                         <xsl:message>
                                             <xsl:value-of select="$BARCODE" />
