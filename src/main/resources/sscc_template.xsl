@@ -45,7 +45,7 @@
                                 <xsl:attribute name="font-size">
                                     <xsl:value-of select="$FONT_SIZE" />
                                 </xsl:attribute>
-                                <xsl:value-of select="substring($SSCC, 3)" />
+                                <xsl:value-of select="$SSCC" />
                             </fo:block>
                             <fo:block text-align="left" margin-left="3mm" font-family="Helvetica" font-size="14pt" space-after="8pt">
                                 <xsl:value-of select="lineItem/description" />
@@ -180,7 +180,7 @@
                                             <!-- strip the check-digit and calc for ourselves '&#x00f0;' is the char that barcode4j replaces with its
                                                 own check-digit
                                             -->
-                                            <xsl:value-of select="concat(substring($SSCC,1,19), '&#x00f0;')" />
+                                            <xsl:value-of select="concat('00', substring($SSCC,1,17), '&#x00f0;')" />
                                         </xsl:attribute>
                                         <barcode:ean-128>
                                             <barcode:module-width>0.49mm</barcode:module-width>

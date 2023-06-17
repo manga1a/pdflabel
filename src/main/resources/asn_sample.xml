@@ -4,10 +4,10 @@
     </header>
     <detail>
         <pallet>
-            <sscc>00999999999000000245</sscc>
+            <sscc>999999999000000245</sscc>
             <lineItem>
                 <gtin>19999999999762</gtin>
-                <description disable-output-escaping="yes">TOGGEN DUNE HARVESTER OIL</description>
+                <description>ACME DUNE HARVESTER OIL</description>
                 <quantity>48</quantity>
                 <dtm>
                     <label>BEST BEFORE</label>
@@ -17,10 +17,10 @@
             </lineItem>
         </pallet>
         <pallet>
-            <sscc>00999999999000000252</sscc>
+            <sscc>999999999000000252</sscc>
             <lineItem>
                 <gtin>19999999993678</gtin>
-                <description disable-output-escaping="yes">TOGGEN GOLD STANDARD 750ML XXX</description>
+                <description>ACME GOLD STANDARD 750ML XXX</description>
                 <quantity>128</quantity>
                 <dtm>
                     <label>USE BY</label>
@@ -30,10 +30,10 @@
             </lineItem>
         </pallet>
         <pallet>
-            <sscc>00999999999000000269</sscc>
+            <sscc>999999999000000269</sscc>
             <lineItem>
                 <gtin>19999999992763</gtin>
-                <description disable-output-escaping="yes">TOGGEN GOLDEN PEEL OIL 750ML</description>
+                <description>ACME GOLDEN PEEL OIL 750ML</description>
                 <quantity>145</quantity>
                 <dtm>
                     <label>BEST BEFORE</label>
