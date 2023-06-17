@@ -9,12 +9,11 @@
                 <gtin>19999999999762</gtin>
                 <description disable-output-escaping="yes">TOGGEN DUNE HARVESTER OIL</description>
                 <quantity>48</quantity>
-                <DTM>
-                    <BESTBEFOREDATE>20220802</BESTBEFOREDATE>
-                </DTM>
-                <RFF>
-                    <BATCHNO>212301</BATCHNO>
-                </RFF>
+                <dtm>
+                    <label>BEST BEFORE</label>
+                    <date>20220802</date>
+                </dtm>
+                <batchNo>212301</batchNo>
             </lineItem>
         </pallet>
         <pallet>
@@ -23,12 +22,11 @@
                 <gtin>19999999993678</gtin>
                 <description disable-output-escaping="yes">TOGGEN GOLD STANDARD 750ML XXX</description>
                 <quantity>128</quantity>
-                <DTM>
-                    <BESTBEFOREDATE>20220802</BESTBEFOREDATE>
-                </DTM>
-                <RFF>
-                    <BATCHNO>212301</BATCHNO>
-                </RFF>
+                <dtm>
+                    <label>USE BY</label>
+                    <date>20220802</date>
+                </dtm>
+                <batchNo>212301</batchNo>
             </lineItem>
         </pallet>
         <pallet>
@@ -37,12 +35,11 @@
                 <gtin>19999999992763</gtin>
                 <description disable-output-escaping="yes">TOGGEN GOLDEN PEEL OIL 750ML</description>
                 <quantity>145</quantity>
-                <DTM>
-                    <BESTBEFOREDATE>20220802</BESTBEFOREDATE>
-                </DTM>
-                <RFF>
-                    <BATCHNO>212301</BATCHNO>
-                </RFF>
+                <dtm>
+                    <label>BEST BEFORE</label>
+                    <date>20220802</date>
+                </dtm>
+                <batchNo>212301</batchNo>
             </lineItem>
         </pallet>
     </detail>

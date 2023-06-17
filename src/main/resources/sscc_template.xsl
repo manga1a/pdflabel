@@ -23,9 +23,10 @@
                         <xsl:variable name="FONT_SIZE_LABELS" select="'11pt'" />
                         <xsl:variable name="SSCC" select="sscc" />
                         <xsl:variable name="GTIN" select="lineItem/gtin" />
-                        <xsl:variable name="BATCH" select="lineItem/RFF/BATCHNO" />
+                        <xsl:variable name="BATCH" select="lineItem/batchNo" />
                         <!-- 20220802 -->
-                        <xsl:variable name="FULL_DATE" select="lineItem/DTM/BESTBEFOREDATE" />
+                        <xsl:variable name="DATE_LABEL" select="lineItem/dtm/label" />
+                        <xsl:variable name="FULL_DATE" select="lineItem/dtm/date" />
                         <xsl:variable name="QTY" select="lineItem/quantity" />
                         <xsl:variable name="YEAR" select="substring($FULL_DATE, 3,2 )" />
                         <xsl:variable name="MONTH" select="substring($FULL_DATE, 5,2)" />
@@ -101,7 +102,9 @@
                                             <xsl:attribute name="font-size">
                                                 <xsl:value-of select="$FONT_SIZE_LABELS" />
                                             </xsl:attribute>
-                                            <fo:block text-align="start">BEST BEFORE (ddmmyy)</fo:block>
+                                            <fo:block text-align="start">
+                                                <xsl:value-of select="concat($DATE_LABEL,' (ddmmyy)')"/>
+                                            </fo:block>
                                         </fo:table-cell>
                                         <fo:table-cell>
                                             <fo:block text-align="center">
