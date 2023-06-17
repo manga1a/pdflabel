@@ -11,13 +11,13 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.sax.SAXResult;
 import javax.xml.transform.stream.StreamSource;
-import java.io.*;
-import java.util.List;
-import java.util.Map;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 public class LabelGenerator {
     private static Logger logger = LoggerFactory.getLogger(LabelGenerator.class);
-    private static final String UTF_8 = "UTF-8";
 
     public LabelGenerator() {
 

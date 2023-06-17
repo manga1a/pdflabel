@@ -43,7 +43,7 @@ public class ConsoleApplication {
                                 .description("Baked Beans 12 x 410g")
                                 .quantity("999")
                                 .useByDate(calendar.getTime())
-                                .batchNo("")
+                                .batchNo("12345")
                                 .build(),
                         palletBuilder
                                 .sscc("393123450000000013")

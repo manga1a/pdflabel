@@ -41,12 +41,12 @@ public class PalletBuilder {
     }
 
     public PalletBuilder bestBeforeDate(Date date) {
-        this.dtm = new Dtm("BEST BEFORE", date);
+        this.dtm = new Dtm("BEST BEFORE", "15", date);
         return this;
     }
 
     public PalletBuilder useByDate(Date date) {
-        this.dtm = new Dtm("USE BY", date);
+        this.dtm = new Dtm("USE BY", "17", date);
         return this;
     }
 

@@ -12,6 +12,7 @@
                 <dtm>
                     <label>BEST BEFORE</label>
                     <date>20220802</date>
+                    <code>15</code>
                 </dtm>
                 <batchNo>212301</batchNo>
             </lineItem>
@@ -25,6 +26,7 @@
                 <dtm>
                     <label>USE BY</label>
                     <date>20220802</date>
+                    <code>17</code>
                 </dtm>
                 <batchNo/>
             </lineItem>
@@ -38,6 +40,7 @@
                 <dtm>
                     <label>BEST BEFORE</label>
                     <date>20220802</date>
+                    <code>15</code>
                 </dtm>
             </lineItem>
         </pallet>

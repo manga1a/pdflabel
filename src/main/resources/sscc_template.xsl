@@ -26,6 +26,7 @@
                         <xsl:variable name="BATCH" select="lineItem/batchNo" />
                         <!-- 20220802 -->
                         <xsl:variable name="DATE_LABEL" select="lineItem/dtm/label" />
+                        <xsl:variable name="DATE_CODE" select="lineItem/dtm/code" />
                         <xsl:variable name="FULL_DATE" select="lineItem/dtm/date" />
                         <xsl:variable name="QTY" select="lineItem/quantity" />
                         <xsl:variable name="YEAR" select="substring($FULL_DATE, 3,2 )" />
@@ -143,10 +144,10 @@
                                     <xsl:variable name="BARCODE">
                                         <xsl:choose>
                                             <xsl:when test="$BATCH != ''">
-                                                <xsl:value-of select="concat('02' , substring($GTIN,1,13) ,'&#x00f0;37' , $PAD_QTY, '&#x00f1;15' , $YEAR , $MONTH , $DAY, '10', $BATCH )"/>
+                                                <xsl:value-of select="concat('02' , substring($GTIN,1,13) ,'&#x00f0;37' , $PAD_QTY, '&#x00f1;', $DATE_CODE , $YEAR , $MONTH , $DAY, '10', $BATCH )"/>
                                             </xsl:when>
                                             <xsl:otherwise>
-                                                <xsl:value-of select="concat('02' , substring($GTIN,1,13) ,'&#x00f0;37' , $PAD_QTY, '&#x00f1;15' , $YEAR , $MONTH , $DAY )"/>
+                                                <xsl:value-of select="concat('02' , substring($GTIN,1,13) ,'&#x00f0;37' , $PAD_QTY, '&#x00f1;', $DATE_CODE , $YEAR , $MONTH , $DAY )"/>
                                             </xsl:otherwise>
                                         </xsl:choose>
                                     </xsl:variable>
