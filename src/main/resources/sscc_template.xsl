@@ -60,7 +60,7 @@
                                                 <xsl:attribute name="font-size">
                                                     <xsl:value-of select="$FONT_SIZE_LABELS" />
                                                 </xsl:attribute>
-                                                ITEM NO
+                                                CONTENT
                                             </fo:block>
                                         </fo:table-cell>
                                         <fo:table-cell>
@@ -68,7 +68,7 @@
                                                 <xsl:attribute name="font-size">
                                                     <xsl:value-of select="$FONT_SIZE_LABELS" />
                                                 </xsl:attribute>
-                                                QUANTITY
+                                                COUNT
                                             </fo:block>
                                         </fo:table-cell>
                                     </fo:table-row>

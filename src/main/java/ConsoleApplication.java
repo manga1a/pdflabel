@@ -15,7 +15,7 @@ public class ConsoleApplication {
 
         try (ByteArrayInputStream dataStream = new ByteArrayInputStream(getDummyData())) {
             LabelGenerator labelGenerator = new LabelGenerator();
-            labelGenerator.generate("./target/sscc-label-test.pdf"/*, dataStream*/);
+            labelGenerator.generate("./target/sscc-label-test.pdf", dataStream);
         } catch (Exception e) {
             System.err.print(e);
         }
@@ -64,7 +64,6 @@ public class ConsoleApplication {
                 .build();
 
         XmlMapper xmlMapper = new XmlMapper();
-        String temp = xmlMapper.writeValueAsString(palletLabels);
         return xmlMapper.writeValueAsBytes(palletLabels);
     }
 }
