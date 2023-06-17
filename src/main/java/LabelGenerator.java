@@ -23,16 +23,13 @@ public class LabelGenerator {
 
     }
 
-    public void generate(String fileName, List<Map<String, Object>> pageVariables) {
-        if (pageVariables == null || pageVariables.isEmpty()) {
-            return;
-        }
+    public void generate(String fileName/*, InputStream dataStream*/) {
 
         ClassLoader classLoader = getClass().getClassLoader();
 
         try (OutputStream outputStream = new FileOutputStream(fileName);
              InputStream templateStream = classLoader.getResourceAsStream("sscc_template.xsl");
-             InputStream dataStream = classLoader.getResourceAsStream("asn_sample.xml")) {
+             InputStream dataStream = classLoader.getResourceAsStream("asn_sample_1.xml")) {
 
             FopFactory fopFactory = FopFactory.newInstance(new File(".").toURI());
             FOUserAgent userAgent = fopFactory.newFOUserAgent();

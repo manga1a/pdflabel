@@ -27,14 +27,14 @@ public class PalletLabelsTest {
                         palletBuilder
                                 .sscc("00999999999000000245")
                                 .gtin("19999999999762")
-                                .description("TOGGEN DUNE HARVESTER OIL")
+                                .description("ACME DUNE HARVESTER OIL")
                                 .quantity("48")
                                 .bestBeforeDate(calendar.getTime())
                                 .batchNo("212301").build(),
                         palletBuilder
                                 .sscc("00999999999000000252")
                                 .gtin("19999999993678")
-                                .description("TOGGEN GOLD STANDARD 750ML XXX")
+                                .description("ACME GOLD STANDARD 750ML XXX")
                                 .quantity("128")
                                 .useByDate(calendar.getTime())
                                 .batchNo("")
@@ -42,7 +42,7 @@ public class PalletLabelsTest {
                         palletBuilder
                                 .sscc("00999999999000000269")
                                 .gtin("19999999992763")
-                                .description("TOGGEN GOLDEN PEEL OIL 750ML")
+                                .description("ACME GOLDEN PEEL OIL 750ML")
                                 .quantity("145")
                                 .bestBeforeDate(calendar.getTime())
                                 .batchNo(null)

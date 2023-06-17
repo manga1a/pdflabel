@@ -14,6 +14,8 @@ public class PalletBuilder {
     private String batchNo;
     private Dtm dtm;
 
+    private static final int DESCRIPTION_MAX_LENGTH = 25;
+
     public PalletBuilder sscc(String sscc) {
         this.sscc = sscc;
         return this;
@@ -25,8 +27,11 @@ public class PalletBuilder {
     }
 
     public PalletBuilder description(String description) {
-        //TODO: enforce string length
-        this.description = description;
+        if(DESCRIPTION_MAX_LENGTH < description.length()) {
+            this.description = String.format("%s...", description.substring(0, DESCRIPTION_MAX_LENGTH));
+        } else {
+            this.description = description;
+        }
         return this;
     }
 
