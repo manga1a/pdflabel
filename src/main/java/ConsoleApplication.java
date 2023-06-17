@@ -56,7 +56,7 @@ public class ConsoleApplication {
                         palletBuilder
                                 .sscc("393123450000000013")
                                 .gtin("09312345000005")
-                                .description("Coconut Powder 12 x 410g")
+                                .description("Coconut Powder 12 x 410g a loooooong text to trim")
                                 .quantity("9999")
                                 .bestBeforeDate(calendar.getTime())
                                 .build()
