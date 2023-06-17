@@ -5,9 +5,8 @@ import pojo.builder.PalletBuilder;
 import pojo.builder.PalletLabelsBuilder;
 
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.util.*;
+import java.util.Calendar;
+import java.util.List;
 
 public class ConsoleApplication {
 
@@ -28,7 +27,7 @@ public class ConsoleApplication {
         PalletBuilder palletBuilder = new PalletBuilder();
 
         PalletLabels palletLabels = new PalletLabelsBuilder()
-                .header("A.Clouet Australia")
+                .header("The Goods Supplier")
                 .detail(List.of(
                         palletBuilder
                                 .sscc("395560410000000018")
