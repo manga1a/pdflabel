@@ -140,7 +140,22 @@
                             <fo:block text-align="center">
                                 <fo:instream-foreign-object>
                                     <xsl:variable name="PAD_QTY" select="format-number($QTY, '00')" />
-                                    <xsl:variable name="BARCODE" select="concat('02' , substring($GTIN,1,13) ,'&#x00f0;37' , $PAD_QTY, '&#x00f1;15' , $YEAR , $MONTH , $DAY, '10', $BATCH )" />
+                                    <xsl:variable name="BARCODE">
+                                        <xsl:choose>
+                                            <xsl:when test="$BATCH != ''">
+                                                <xsl:value-of select="concat('02' , substring($GTIN,1,13) ,'&#x00f0;37' , $PAD_QTY, '&#x00f1;15' , $YEAR , $MONTH , $DAY, '10', $BATCH )"/>
+                                            </xsl:when>
+                                            <xsl:otherwise>
+                                                <xsl:value-of select="concat('02' , substring($GTIN,1,13) ,'&#x00f0;37' , $PAD_QTY, '&#x00f1;15' , $YEAR , $MONTH , $DAY )"/>
+                                            </xsl:otherwise>
+                                        </xsl:choose>
+                                    </xsl:variable>
+                                    <xsl:variable name="BARCODE_TEMPLATE">
+                                        <xsl:choose>
+                                            <xsl:when test="$BATCH != ''">(02)n13+cd(37)n1-8(15)n6(10)an1-20</xsl:when>
+                                            <xsl:otherwise>(02)n13+cd(37)n1-8(15)n6</xsl:otherwise>
+                                        </xsl:choose>
+                                    </xsl:variable>
                                     <barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns" orientation="0">
                                         <xsl:message>
                                             <xsl:value-of select="$BARCODE" />
@@ -151,7 +166,7 @@
                                         <barcode:ean-128>
                                             <barcode:check-digit-marker>&#x00f0;</barcode:check-digit-marker>
                                             <barcode:module-width>0.32mm</barcode:module-width>
-                                            <barcode:template>(02)n13+cd(37)n1-8(15)n6(10)an1-20</barcode:template>
+                                            <barcode:template><xsl:value-of select="$BARCODE_TEMPLATE" /></barcode:template>
                                             <barcode:height>36mm</barcode:height>
                                             <barcode:human-readable>
                                                 <barcode:placement>bottom</barcode:placement>
