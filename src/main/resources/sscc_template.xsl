@@ -93,8 +93,8 @@
                                 </fo:table-body>
                             </fo:table>
                             <fo:table width="10cm" table-layout="fixed" margin-left="1.5mm">
-                                <fo:table-column column-width="6cm" />
-                                <fo:table-column column-width="3.9cm" />
+                                <fo:table-column column-width="5cm" />
+                                <fo:table-column column-width="4.9cm" />
                                 <fo:table-body font-family="sans-serif" font-weight="normal" font-size="10pt">
                                     <fo:table-row>
                                         <fo:table-cell>
@@ -157,9 +157,6 @@
                                         </xsl:choose>
                                     </xsl:variable>
                                     <barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns" orientation="0">
-                                        <xsl:message>
-                                            <xsl:value-of select="$BARCODE" />
-                                        </xsl:message>
                                         <xsl:attribute name="message">
                                             <xsl:value-of select="$BARCODE" />
                                         </xsl:attribute>
@@ -180,8 +177,8 @@
                                 <fo:instream-foreign-object>
                                     <barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns" message="REPLACEDBYATTRIBUTE" orientation="0">
                                         <xsl:attribute name="message">
-                                            <!-- strip the checkdigit and calc for ourselves '&#x00f0;' is the char that barcode4j replaces with its
-                                                own checkdigit
+                                            <!-- strip the check-digit and calc for ourselves '&#x00f0;' is the char that barcode4j replaces with its
+                                                own check-digit
                                             -->
                                             <xsl:value-of select="concat(substring($SSCC,1,19), '&#x00f0;')" />
                                         </xsl:attribute>
