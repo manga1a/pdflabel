@@ -93,9 +93,8 @@
                                 </fo:table-body>
                             </fo:table>
                             <fo:table width="10cm" table-layout="fixed" margin-left="1.5mm">
-                                <fo:table-column column-width="5cm" />
-                                <fo:table-column column-width="3.0cm" />
-                                <fo:table-column column-width="2cm" />
+                                <fo:table-column column-width="6cm" />
+                                <fo:table-column column-width="3.9cm" />
                                 <fo:table-body font-family="sans-serif" font-weight="normal" font-size="10pt">
                                     <fo:table-row>
                                         <fo:table-cell>
@@ -107,21 +106,13 @@
                                             </fo:block>
                                         </fo:table-cell>
                                         <fo:table-cell>
-                                            <fo:block text-align="center">
+                                            <fo:block text-align="end">
                                                 <xsl:attribute name="font-size">
                                                     <xsl:value-of select="$FONT_SIZE_LABELS" />
                                                 </xsl:attribute>
                                                 BATCH
                                             </fo:block>
                                         </fo:table-cell>
-<!--                                        <fo:table-cell>-->
-<!--                                            <fo:block text-align="end">-->
-<!--                                                <xsl:attribute name="font-size">-->
-<!--                                                    <xsl:value-of select="$FONT_SIZE_LABELS" />-->
-<!--                                                </xsl:attribute>-->
-<!--                                                DC-->
-<!--                                            </fo:block>-->
-<!--                                        </fo:table-cell>-->
                                     </fo:table-row>
                                     <fo:table-row>
                                         <fo:table-cell>
@@ -133,21 +124,13 @@
                                             </fo:block>
                                         </fo:table-cell>
                                         <fo:table-cell>
-                                            <fo:block text-align="center" font-size="22pt">
+                                            <fo:block text-align="end" font-size="22pt">
                                                 <xsl:attribute name="font-size">
                                                     <xsl:value-of select="$FONT_SIZE" />
                                                 </xsl:attribute>
                                                 <xsl:value-of select="$BATCH" />
                                             </fo:block>
                                         </fo:table-cell>
-<!--                                        <fo:table-cell vertical-align="top">-->
-<!--                                            <fo:block text-align="end" font-size="16pt">-->
-<!--                                                <xsl:attribute name="font-size">-->
-<!--                                                    <xsl:value-of select="$FONT_SIZE_LABELS" />-->
-<!--                                                </xsl:attribute>-->
-<!--                                                <xsl:value-of select="$STORECODE" />-->
-<!--                                            </fo:block>-->
-<!--                                        </fo:table-cell>-->
                                     </fo:table-row>
                                 </fo:table-body>
                             </fo:table>
