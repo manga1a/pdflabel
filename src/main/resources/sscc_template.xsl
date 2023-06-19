@@ -51,7 +51,7 @@
                                 <xsl:value-of select="$SSCC"/>
                             </fo:block>
                             <fo:block text-align="left" margin-left="3mm" font-family="Helvetica" font-size="14pt"
-                                      space-after="8pt">
+                                      space-after="8pt" wrap-option="no-wrap">
                                 <xsl:value-of select="lineItem/description"/>
                             </fo:block>
                             <fo:table width="10cm" table-layout="fixed" margin-left="1.5mm">
