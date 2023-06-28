@@ -174,13 +174,27 @@
                                             </xsl:otherwise>
                                         </xsl:choose>
                                     </xsl:variable>
+                                    <xsl:variable name="MODULE_WIDTH">
+                                        <xsl:choose>
+                                            <xsl:when test="$BATCH != ''">
+                                                <xsl:value-of
+                                                        select="'0.33mm'"/>
+                                            </xsl:when>
+                                            <xsl:otherwise>
+                                                <xsl:value-of
+                                                        select="'0.41mm'"/>
+                                            </xsl:otherwise>
+                                        </xsl:choose>
+                                    </xsl:variable>
                                     <barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns" orientation="0">
                                         <xsl:attribute name="message">
                                             <xsl:value-of select="$BARCODE"/>
                                         </xsl:attribute>
                                         <barcode:ean-128>
                                             <barcode:check-digit-marker>&#x00f0;</barcode:check-digit-marker>
-                                            <barcode:module-width>0.32mm</barcode:module-width>
+                                            <barcode:module-width>
+                                                <xsl:value-of select="$MODULE_WIDTH"/>
+                                            </barcode:module-width>
                                             <barcode:template>
                                                 <xsl:value-of select="$BARCODE_TEMPLATE"/>
                                             </barcode:template>
