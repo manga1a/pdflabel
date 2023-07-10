@@ -146,34 +146,10 @@
                             <fo:block text-align="center">
                                 <fo:instream-foreign-object>
                                     <xsl:variable name="PAD_QTY" select="format-number($QTY, '00')"/>
-                                    <xsl:variable name="BARCODE_WITHOUT_BATCH"
-                                                  select="concat('02' , substring($GTIN,1,13) ,'&#x00f0;37' , $PAD_QTY, '&#x00f1;', $DATE_CODE , $YEAR , $MONTH , $DAY)"/>
-                                    <xsl:variable name="BARCODE">
-                                        <xsl:choose>
-                                            <xsl:when test="$BATCH != ''">
-                                                <xsl:value-of
-                                                        select="concat($BARCODE_WITHOUT_BATCH, '10', $BATCH )"/>
-                                            </xsl:when>
-                                            <xsl:otherwise>
-                                                <xsl:value-of
-                                                        select="$BARCODE_WITHOUT_BATCH"/>
-                                            </xsl:otherwise>
-                                        </xsl:choose>
-                                    </xsl:variable>
-                                    <xsl:variable name="BARCODE_TEMPLATE_WITHOUT_BATCH"
-                                                  select="concat('(02)n13+cd(37)n1-8(', $DATE_CODE, ')n6')"/>
-                                    <xsl:variable name="BARCODE_TEMPLATE">
-                                        <xsl:choose>
-                                            <xsl:when test="$BATCH != ''">
-                                                <xsl:value-of
-                                                        select="concat($BARCODE_TEMPLATE_WITHOUT_BATCH, '(10)an1-20')"/>
-                                            </xsl:when>
-                                            <xsl:otherwise>
-                                                <xsl:value-of
-                                                        select="$BARCODE_TEMPLATE_WITHOUT_BATCH"/>
-                                            </xsl:otherwise>
-                                        </xsl:choose>
-                                    </xsl:variable>
+                                    <xsl:variable name="BARCODE"
+                                                  select="concat('02' , substring($GTIN,1,13) ,'&#x00f0;37' , $PAD_QTY, '&#x00f1;', $DATE_CODE , $YEAR , $MONTH , $DAY, '10', $BATCH)"/>
+                                    <xsl:variable name="BARCODE_TEMPLATE"
+                                                  select="concat('(02)n13+cd(37)n1-8(', $DATE_CODE, ')n6(10)an1-20')"/>
                                     <xsl:variable name="MODULE_WIDTH">
                                         <xsl:choose>
                                             <xsl:when test="$BATCH != ''">
