@@ -45,7 +45,7 @@
                                 <fo:table-body font-family="sans-serif" font-weight="normal" font-size="10pt">
                                     <fo:table-row>
                                         <fo:table-cell>
-                                            <fo:block text-align="start">
+                                            <fo:block text-align="start" margin-top="1mm">
                                                 <xsl:attribute name="font-size">
                                                     <xsl:value-of select="$FONT_SIZE_LABELS"/>
                                                 </xsl:attribute>
