@@ -35,6 +35,7 @@
                         <xsl:variable name="MONTH" select="substring($FULL_DATE, 5,2)"/>
                         <xsl:variable name="DAY" select="substring($FULL_DATE, 7,2 )"/>
                         <xsl:variable name="BARCODE_HEIGHT" select="'32mm'"/>
+                        <xsl:variable name="BARCODE_MODULE_WIDTH" select="'0.49mm'"/>
                         <fo:block-container>
                             <fo:block text-align="center" font-family="Helvetica" font-size="15pt" margin-top="2pt">
                                 <xsl:value-of select="$COMPANY"/>
@@ -67,114 +68,101 @@
                                       space-after="8pt" wrap-option="no-wrap">
                                 <xsl:value-of select="lineItem/description"/>
                             </fo:block>
-                            <fo:table width="10cm" table-layout="fixed" margin-left="1.5mm">
-                                <fo:table-column column-width="6.7cm"/>
-                                <fo:table-column column-width="3.2cm"/>
-                                <fo:table-body font-family="sans-serif" font-weight="normal" font-size="10pt">
-                                    <fo:table-row>
-                                        <fo:table-cell>
-                                            <fo:block text-align="start">
-                                                <xsl:attribute name="font-size">
-                                                    <xsl:value-of select="$FONT_SIZE_LABELS"/>
-                                                </xsl:attribute>
-                                                CONTENT
-                                            </fo:block>
-                                        </fo:table-cell>
-                                        <fo:table-cell>
-                                            <fo:block text-align="end">
-                                                <xsl:attribute name="font-size">
-                                                    <xsl:value-of select="$FONT_SIZE_LABELS"/>
-                                                </xsl:attribute>
-                                                COUNT
-                                            </fo:block>
-                                        </fo:table-cell>
-                                    </fo:table-row>
-                                    <fo:table-row>
-                                        <fo:table-cell>
-                                            <fo:block text-align="start" font-size="26pt">
-                                                <xsl:attribute name="font-size">
-                                                    <xsl:value-of select="$FONT_SIZE"/>
-                                                </xsl:attribute>
-                                                <xsl:value-of select="$GTIN"/>
-                                            </fo:block>
-                                        </fo:table-cell>
-                                        <fo:table-cell>
-                                            <fo:block text-align="end" font-size="10pt">
-                                                <xsl:attribute name="font-size">
-                                                    <xsl:value-of select="$FONT_SIZE"/>
-                                                </xsl:attribute>
-                                                <xsl:value-of select="$QTY"/>
-                                            </fo:block>
-                                        </fo:table-cell>
-                                    </fo:table-row>
-                                </fo:table-body>
-                            </fo:table>
-                            <fo:table width="10cm" table-layout="fixed" margin-left="1.5mm">
-                                <fo:table-column column-width="5cm"/>
-                                <fo:table-column column-width="4.9cm"/>
-                                <fo:table-body font-family="sans-serif" font-weight="normal" font-size="10pt">
-                                    <fo:table-row>
-                                        <fo:table-cell>
-                                            <xsl:attribute name="font-size">
-                                                <xsl:value-of select="$FONT_SIZE_LABELS"/>
-                                            </xsl:attribute>
-                                            <fo:block text-align="start">
-                                                <xsl:value-of select="concat($DATE_LABEL,' (ddmmyy)')"/>
-                                            </fo:block>
-                                        </fo:table-cell>
-                                        <fo:table-cell>
-                                            <fo:block text-align="end">
-                                                <xsl:attribute name="font-size">
-                                                    <xsl:value-of select="$FONT_SIZE_LABELS"/>
-                                                </xsl:attribute>
-                                                BATCH
-                                            </fo:block>
-                                        </fo:table-cell>
-                                    </fo:table-row>
-                                    <fo:table-row>
-                                        <fo:table-cell>
-                                            <fo:block text-align="start" font-size="24pt">
-                                                <xsl:attribute name="font-size">
-                                                    <xsl:value-of select="$FONT_SIZE"/>
-                                                </xsl:attribute>
-                                                <xsl:value-of select="concat($DAY,'.' , $MONTH,'.' , $YEAR)"/>
-                                            </fo:block>
-                                        </fo:table-cell>
-                                        <fo:table-cell>
-                                            <fo:block text-align="end" font-size="22pt">
-                                                <xsl:attribute name="font-size">
-                                                    <xsl:value-of select="$FONT_SIZE"/>
-                                                </xsl:attribute>
-                                                <xsl:value-of select="$BATCH"/>
-                                            </fo:block>
-                                        </fo:table-cell>
-                                    </fo:table-row>
-                                </fo:table-body>
-                            </fo:table>
+                            <!--                            <fo:table width="10cm" table-layout="fixed" margin-left="1.5mm">-->
+                            <!--                                <fo:table-column column-width="6.7cm"/>-->
+                            <!--                                <fo:table-column column-width="3.2cm"/>-->
+                            <!--                                <fo:table-body font-family="sans-serif" font-weight="normal" font-size="10pt">-->
+                            <!--                                    <fo:table-row>-->
+                            <!--                                        <fo:table-cell>-->
+                            <!--                                            <fo:block text-align="start">-->
+                            <!--                                                <xsl:attribute name="font-size">-->
+                            <!--                                                    <xsl:value-of select="$FONT_SIZE_LABELS"/>-->
+                            <!--                                                </xsl:attribute>-->
+                            <!--                                                CONTENT-->
+                            <!--                                            </fo:block>-->
+                            <!--                                        </fo:table-cell>-->
+                            <!--                                        <fo:table-cell>-->
+                            <!--                                            <fo:block text-align="end">-->
+                            <!--                                                <xsl:attribute name="font-size">-->
+                            <!--                                                    <xsl:value-of select="$FONT_SIZE_LABELS"/>-->
+                            <!--                                                </xsl:attribute>-->
+                            <!--                                                COUNT-->
+                            <!--                                            </fo:block>-->
+                            <!--                                        </fo:table-cell>-->
+                            <!--                                    </fo:table-row>-->
+                            <!--                                    <fo:table-row>-->
+                            <!--                                        <fo:table-cell>-->
+                            <!--                                            <fo:block text-align="start" font-size="26pt">-->
+                            <!--                                                <xsl:attribute name="font-size">-->
+                            <!--                                                    <xsl:value-of select="$FONT_SIZE"/>-->
+                            <!--                                                </xsl:attribute>-->
+                            <!--                                                <xsl:value-of select="$GTIN"/>-->
+                            <!--                                            </fo:block>-->
+                            <!--                                        </fo:table-cell>-->
+                            <!--                                        <fo:table-cell>-->
+                            <!--                                            <fo:block text-align="end" font-size="10pt">-->
+                            <!--                                                <xsl:attribute name="font-size">-->
+                            <!--                                                    <xsl:value-of select="$FONT_SIZE"/>-->
+                            <!--                                                </xsl:attribute>-->
+                            <!--                                                <xsl:value-of select="$QTY"/>-->
+                            <!--                                            </fo:block>-->
+                            <!--                                        </fo:table-cell>-->
+                            <!--                                    </fo:table-row>-->
+                            <!--                                </fo:table-body>-->
+                            <!--                            </fo:table>-->
+                            <!--                            <fo:table width="10cm" table-layout="fixed" margin-left="1.5mm">-->
+                            <!--                                <fo:table-column column-width="5cm"/>-->
+                            <!--                                <fo:table-column column-width="4.9cm"/>-->
+                            <!--                                <fo:table-body font-family="sans-serif" font-weight="normal" font-size="10pt">-->
+                            <!--                                    <fo:table-row>-->
+                            <!--                                        <fo:table-cell>-->
+                            <!--                                            <xsl:attribute name="font-size">-->
+                            <!--                                                <xsl:value-of select="$FONT_SIZE_LABELS"/>-->
+                            <!--                                            </xsl:attribute>-->
+                            <!--                                            <fo:block text-align="start">-->
+                            <!--                                                <xsl:value-of select="concat($DATE_LABEL,' (ddmmyy)')"/>-->
+                            <!--                                            </fo:block>-->
+                            <!--                                        </fo:table-cell>-->
+                            <!--                                        <fo:table-cell>-->
+                            <!--                                            <fo:block text-align="end">-->
+                            <!--                                                <xsl:attribute name="font-size">-->
+                            <!--                                                    <xsl:value-of select="$FONT_SIZE_LABELS"/>-->
+                            <!--                                                </xsl:attribute>-->
+                            <!--                                                BATCH-->
+                            <!--                                            </fo:block>-->
+                            <!--                                        </fo:table-cell>-->
+                            <!--                                    </fo:table-row>-->
+                            <!--                                    <fo:table-row>-->
+                            <!--                                        <fo:table-cell>-->
+                            <!--                                            <fo:block text-align="start" font-size="24pt">-->
+                            <!--                                                <xsl:attribute name="font-size">-->
+                            <!--                                                    <xsl:value-of select="$FONT_SIZE"/>-->
+                            <!--                                                </xsl:attribute>-->
+                            <!--                                                <xsl:value-of select="concat($DAY,'.' , $MONTH,'.' , $YEAR)"/>-->
+                            <!--                                            </fo:block>-->
+                            <!--                                        </fo:table-cell>-->
+                            <!--                                        <fo:table-cell>-->
+                            <!--                                            <fo:block text-align="end" font-size="22pt">-->
+                            <!--                                                <xsl:attribute name="font-size">-->
+                            <!--                                                    <xsl:value-of select="$FONT_SIZE"/>-->
+                            <!--                                                </xsl:attribute>-->
+                            <!--                                                <xsl:value-of select="$BATCH"/>-->
+                            <!--                                            </fo:block>-->
+                            <!--                                        </fo:table-cell>-->
+                            <!--                                    </fo:table-row>-->
+                            <!--                                </fo:table-body>-->
+                            <!--                            </fo:table>-->
                             <fo:block line-height="1pt" text-align="center" left="0mm" space-before="0pt"
                                       space-after="10pt" padding="0pt">
                                 <fo:leader line-height="1pt" leader-pattern="rule" rule-thickness="1pt"
                                            leader-length="100%"/>
                             </fo:block>
+                            <!-- GTIN and Count Barcode-->
                             <fo:block text-align="center">
                                 <fo:instream-foreign-object>
                                     <xsl:variable name="PAD_QTY" select="format-number($QTY, '00')"/>
                                     <xsl:variable name="BARCODE"
-                                                  select="concat('02' , substring($GTIN,1,13) ,'&#x00f0;37' , $PAD_QTY, '&#x00f1;', $DATE_CODE , $YEAR , $MONTH , $DAY, '10', $BATCH)"/>
-                                    <xsl:variable name="BARCODE_TEMPLATE"
-                                                  select="concat('(02)n13+cd(37)n1-8(', $DATE_CODE, ')n6(10)an1-20')"/>
-                                    <xsl:variable name="MODULE_WIDTH">
-                                        <xsl:choose>
-                                            <xsl:when test="$BATCH != ''">
-                                                <xsl:value-of
-                                                        select="'0.33mm'"/>
-                                            </xsl:when>
-                                            <xsl:otherwise>
-                                                <xsl:value-of
-                                                        select="'0.41mm'"/>
-                                            </xsl:otherwise>
-                                        </xsl:choose>
-                                    </xsl:variable>
+                                                  select="concat('02' , substring($GTIN,1,13) ,'&#x00f0;37' , $PAD_QTY)"/>
                                     <barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns" orientation="0">
                                         <xsl:attribute name="message">
                                             <xsl:value-of select="$BARCODE"/>
@@ -182,12 +170,14 @@
                                         <barcode:ean-128>
                                             <barcode:check-digit-marker>&#x00f0;</barcode:check-digit-marker>
                                             <barcode:module-width>
-                                                <xsl:value-of select="$MODULE_WIDTH"/>
+                                                <xsl:value-of select="$BARCODE_MODULE_WIDTH"/>
                                             </barcode:module-width>
                                             <barcode:template>
-                                                <xsl:value-of select="$BARCODE_TEMPLATE"/>
+                                                (02)n13+cd(37)n1-8
                                             </barcode:template>
-                                            <barcode:height><xsl:value-of select="$BARCODE_HEIGHT"/></barcode:height>
+                                            <barcode:height>
+                                                <xsl:value-of select="$BARCODE_HEIGHT"/>
+                                            </barcode:height>
                                             <barcode:human-readable>
                                                 <barcode:placement>bottom</barcode:placement>
                                                 <barcode:font-size>10pt</barcode:font-size>
@@ -196,6 +186,37 @@
                                     </barcode:barcode>
                                 </fo:instream-foreign-object>
                             </fo:block>
+                            <!-- Date and Batch Barcode-->
+                            <fo:block text-align="center">
+                                <fo:instream-foreign-object>
+<!--                                    <xsl:variable name="PAD_QTY" select="format-number($QTY, '00')"/>-->
+<!--                                    <xsl:variable name="BARCODE"-->
+<!--                                                  select="concat($DATE_CODE , $YEAR , $MONTH , $DAY, '10', $BATCH)"/>-->
+<!--                                    <xsl:variable name="BARCODE_TEMPLATE"-->
+<!--                                                  select="concat('(', $DATE_CODE, ')n6(10)an1-20')"/>-->
+                                    <barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns" orientation="0">
+                                        <xsl:attribute name="message">
+                                            <xsl:value-of select="concat($DATE_CODE , $YEAR , $MONTH , $DAY, '10', $BATCH)"/>
+                                        </xsl:attribute>
+                                        <barcode:ean-128>
+                                            <barcode:module-width>
+                                                <xsl:value-of select="$BARCODE_MODULE_WIDTH"/>
+                                            </barcode:module-width>
+                                            <barcode:template>
+                                                <xsl:value-of select="concat('(', $DATE_CODE, ')n6(10)an1-20')"/>
+                                            </barcode:template>
+                                            <barcode:height>
+                                                <xsl:value-of select="$BARCODE_HEIGHT"/>
+                                            </barcode:height>
+                                            <barcode:human-readable>
+                                                <barcode:placement>bottom</barcode:placement>
+                                                <barcode:font-size>10pt</barcode:font-size>
+                                            </barcode:human-readable>
+                                        </barcode:ean-128>
+                                    </barcode:barcode>
+                                </fo:instream-foreign-object>
+                            </fo:block>
+                            <!-- SSCC Barcode-->
                             <fo:block text-align="center" space-after="0pt">
                                 <fo:instream-foreign-object>
                                     <barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns"
@@ -207,9 +228,13 @@
                                             <xsl:value-of select="concat('00', substring($SSCC,1,17), '&#x00f0;')"/>
                                         </xsl:attribute>
                                         <barcode:ean-128>
-                                            <barcode:module-width>0.49mm</barcode:module-width>
+                                            <barcode:module-width>
+                                                <xsl:value-of select="$BARCODE_MODULE_WIDTH"/>
+                                            </barcode:module-width>
                                             <barcode:template>(00)n17+cd</barcode:template>
-                                            <barcode:height><xsl:value-of select="$BARCODE_HEIGHT"/></barcode:height>
+                                            <barcode:height>
+                                                <xsl:value-of select="$BARCODE_HEIGHT"/>
+                                            </barcode:height>
                                             <barcode:human-readable>
                                                 <barcode:font-size>10pt</barcode:font-size>
                                             </barcode:human-readable>
