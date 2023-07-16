@@ -28,7 +28,7 @@ public class LabelGenerator {
         ClassLoader classLoader = getClass().getClassLoader();
 
         try (OutputStream outputStream = new FileOutputStream(fileName);
-             InputStream templateStream = classLoader.getResourceAsStream("sscc_template.xsl");
+             InputStream templateStream = classLoader.getResourceAsStream("sscc_template_A6_3_stack.xsl");
              //InputStream dataStream = classLoader.getResourceAsStream("asn_sample.xml")
         ) {
 
