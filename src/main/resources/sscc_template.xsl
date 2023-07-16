@@ -187,16 +187,44 @@
                             <fo:block text-align="center">
                                 <fo:instream-foreign-object>
                                     <barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns" orientation="0">
+                                        <xsl:variable name="BARCODE_WITHOUT_BATCH"
+                                                      select="concat($DATE_CODE , $YEAR , $MONTH , $DAY)"/>
+                                        <xsl:variable name="BARCODE">
+                                            <xsl:choose>
+                                                <xsl:when test="$BATCH != ''">
+                                                    <xsl:value-of
+                                                            select="concat($BARCODE_WITHOUT_BATCH, '10', $BATCH )"/>
+                                                </xsl:when>
+                                                <xsl:otherwise>
+                                                    <xsl:value-of
+                                                            select="$BARCODE_WITHOUT_BATCH"/>
+                                                </xsl:otherwise>
+                                            </xsl:choose>
+                                        </xsl:variable>
+                                        <xsl:variable name="BARCODE_TEMPLATE_WITHOUT_BATCH"
+                                                      select="concat('(', $DATE_CODE, ')n6')"/>
+                                        <xsl:variable name="BARCODE_TEMPLATE">
+                                            <xsl:choose>
+                                                <xsl:when test="$BATCH != ''">
+                                                    <xsl:value-of
+                                                            select="concat($BARCODE_TEMPLATE_WITHOUT_BATCH, '(10)an1-20')"/>
+                                                </xsl:when>
+                                                <xsl:otherwise>
+                                                    <xsl:value-of
+                                                            select="$BARCODE_TEMPLATE_WITHOUT_BATCH"/>
+                                                </xsl:otherwise>
+                                            </xsl:choose>
+                                        </xsl:variable>
                                         <xsl:attribute name="message">
                                             <xsl:value-of
-                                                    select="concat($DATE_CODE , $YEAR , $MONTH , $DAY, '10', $BATCH)"/>
+                                                    select="$BARCODE"/>
                                         </xsl:attribute>
                                         <barcode:ean-128>
                                             <barcode:module-width>
                                                 <xsl:value-of select="$BARCODE_MODULE_WIDTH"/>
                                             </barcode:module-width>
                                             <barcode:template>
-                                                <xsl:value-of select="concat('(', $DATE_CODE, ')n6(10)an1-20')"/>
+                                                <xsl:value-of select="$BARCODE_TEMPLATE"/>
                                             </barcode:template>
                                             <barcode:height>
                                                 <xsl:value-of select="$BARCODE_HEIGHT"/>

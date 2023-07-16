@@ -42,7 +42,7 @@ public class ConsoleApplication {
                                 .description("Baked Beans 12 x 410g")
                                 .quantity("999")
                                 .useByDate(calendar.getTime())
-                                .batchNo("12345")
+                                .batchNo("1234567890")
                                 .build(),
                         palletBuilder
                                 .sscc("393123450000000013")
@@ -50,7 +50,7 @@ public class ConsoleApplication {
                                 .description("Coconut Milk 12 x 410g")
                                 .quantity("1999")
                                 .useByDate(calendar.getTime())
-                                .batchNo("abcdefg")
+                                .batchNo("")
                                 .build(),
                         palletBuilder
                                 .sscc("393123450000000013")
@@ -58,7 +58,7 @@ public class ConsoleApplication {
                                 .description("COCONUT POWDER 12 X 410G A LOOOOOONG TEXT TO TRIM")
                                 .quantity("9999")
                                 .bestBeforeDate(calendar.getTime())
-                                .batchNo("123fgte")
+                                .batchNo(null)
                                 .build()
                 ))
                 .build();
